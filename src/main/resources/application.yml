@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: ipl-dashboard
+
+server:
+  port: 8090
+
+management:
+  endpoint:
+    health:
+      enabled: true
+    info:
+      enabled: true
+    metrics:
+      enabled: true
+    env:
+      enabled: true
