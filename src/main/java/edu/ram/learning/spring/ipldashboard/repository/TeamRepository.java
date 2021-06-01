@@ -7,5 +7,6 @@ import edu.ram.learning.spring.ipldashboard.model.Team;
 
 @Repository
 public interface TeamRepository extends CrudRepository<Team, String>  {
-    public Team getById(String teamId);
+    public Team getByIdOrName(String teamId, String name);
+    public Team getByName(String name);
 }

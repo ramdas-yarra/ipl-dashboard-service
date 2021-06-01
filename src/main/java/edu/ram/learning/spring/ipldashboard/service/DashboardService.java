@@ -29,7 +29,8 @@ public class DashboardService {
     private MatchRepository matchRepository;
     
     public TeamDashboardDto getTeamDashboard(final String teamId, final int numberOfMatches) {
-        Team team = teamRepository.getById(teamId);
+        Team team = teamRepository.getByIdOrName(teamId.toUpperCase(), teamId);
+        
         TeamDashboardDto teamDashboardDto = new TeamDashboardDto();
         if(team !=null) {
             TeamDto teamDto = new TeamDto();
