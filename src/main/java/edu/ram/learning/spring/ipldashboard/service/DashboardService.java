@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,14 @@ public class DashboardService {
             } 
         }
         return teamDashboardDto;
-    } 
+    }
+    
+    public List<String> getAllTeams() {
+        final List<String> teams = new ArrayList<>();
+        Iterable<Team> allTeams =  teamRepository.findAll();
+        allTeams.forEach(team -> {
+            teams.add(team.getName());
+        });
+        return Collections.unmodifiableList(teams);
+    }
 }

@@ -1,9 +1,12 @@
 package edu.ram.learning.spring.ipldashboard.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,5 +35,17 @@ public class DashboardController {
         }
         ResponseEntity<TeamDashboardDto> teamDashboardResponse = new ResponseEntity<>(teamDashboard, status);
         return teamDashboardResponse;
+    }
+
+    @GetMapping(path = "/teams", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<String>> getTeams() {
+        HttpStatus responseStatus = HttpStatus.OK;
+
+        List<String> teams = dashboardService.getAllTeams();
+        if(CollectionUtils.isEmpty(teams)) {
+            responseStatus = HttpStatus.NO_CONTENT;
+        }
+        ResponseEntity<List<String>> teamsResponse = new ResponseEntity<List<String>>(teams, responseStatus);
+        return teamsResponse;
     }
 }
